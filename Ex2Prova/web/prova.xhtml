@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Prova de Tabuada Online</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="./css/style.css"/>
+    </head>
+    <body>
+        <h1>Prova de Tabuada Online</h1>
+        <h1>Questão #{progressoBean.atualquestoes.indice} de  20</h1>
+         <h:form>
+             <h3>#{progressoBean.atualquestoes.num1} x #{progressoBean.atualquestoes.num2} = </h3>
+                <h:inputText 
+                required="true" value="#{progressoBean.atualresposta.resposta}"  requiredMessage="Informe a descrição"        size="2"
+                      validatorMessage="Descrição deve ter entre 5 e 100 caracteres">
+            </h:inputText>
+            <h:commandButton value="Responder" action="#{progressoBean.responde()}" />
+        </h:form>
+        <h:messages infoClass="info" errorClass="error" />
+        
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <div>Prova de Tabuada Online</div>
+        <h1> Sua Nota: #{progressoBean.atualprova.nota}</h1>
+        
+        <c:if test="#{not empty(progressoBean.listaProvasFeitas)}">
+            <h1>Resultados </h1>
+        <h:dataTable value="#{progressoBean.listaProvasFeitas}" var="resp" border="1"
+                     cellpadding="5" class="titulo">
+            
+            <h:column class="colunas">
+                <f:facet name="header" >Nome</f:facet>
+                <h:outputText value="#{resp.nomedoAluno}"/>
+            </h:column>
+            <h:column class="colunas">
+                <f:facet name="header"  >Numero de Matricula</f:facet>
+                <h:outputText value="#{resp.numeroMatricula}"/>
+            </h:column >
+            <h:column class="colunas">
+                <f:facet name="header">Nota</f:facet>
+                <h:outputText value="#{resp.nota}"/>
+            </h:column>
+        </h:dataTable>
+        </c:if>
+        
+        <h:form style="margin-top: 2rem">
+            <h:commandButton value="Terminar" 
+                         action="#{progressoBean.returnInicio()}"/>
+        </h:form>
+        <h:messages infoClass="info" errorClass="error" style="display: none"/>
+        
+        
+    </body>
+</html>
