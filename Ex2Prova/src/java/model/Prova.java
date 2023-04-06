@@ -56,36 +56,7 @@ public class Prova{
         this.nota = nota;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Prova other = (Prova) obj;
-        if (Double.doubleToLongBits(this.nota) != Double.doubleToLongBits(other.nota)) {
-            return false;
-        }
-       
-        if (!Objects.equals(this.numeroMatricula, other.numeroMatricula)) {
-            return false;
-        }
-        if (!Objects.equals(this.nomedoAluno, other.nomedoAluno)) {
-            return false;
-        }
-        return Objects.equals(this.dataProva, other.dataProva);
-    }
+   
     
     
     

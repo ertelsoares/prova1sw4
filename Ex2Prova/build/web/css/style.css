@@ -1,9 +1,9 @@
 .info {
-    color:green;
+    color:green!important;
     font-weight: bold;
 }
 .error{
-    color:red;
+    color:red!important;
     font-weight: bold;
 }
 .titulo{

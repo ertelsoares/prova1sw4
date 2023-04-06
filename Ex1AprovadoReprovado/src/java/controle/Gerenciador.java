@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -61,9 +62,14 @@ public class Gerenciador extends HttpServlet {
             String nome = request.getParameter("nome");
             String reqnota1 = request.getParameter("nota1");
             String reqnota2 = request.getParameter("nota2");
+            Pattern p=Pattern.compile("[0-9]+");
+      
             if(nome.equals("") || reqnota1.equals("") || 
                    reqnota2.equals("")){
               throw new Exception("Faltou prencher um campo"); 
+            }
+            if(p.equals(nome)){
+               throw new Exception("O nome deve ser  letras e não numeros");  
             }
             DecimalFormat df = new DecimalFormat();
             DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.forLanguageTag("pt"));
@@ -74,7 +80,8 @@ public class Gerenciador extends HttpServlet {
            
             
            if(nota1 > 10 || nota2 > 10){
-               throw new Exception("As notas vão até 10 , tem que ser menor que 10");
+               throw new Exception("As notas vão até 10,tem que ser menor que 10.</br>E use virgulas em vez de ponto para numeros fracionários");
+               
            }else{
             
              if(aluno.getMedia() >= 7.0){
@@ -86,7 +93,7 @@ public class Gerenciador extends HttpServlet {
            
 
         }catch(ParseException ex){
-          sessao.setAttribute("msgErro", "Formato de número inválido");
+          sessao.setAttribute("msgErro", "Digite um numero");
         
         }catch (Exception ex){
             sessao.setAttribute("msgErro", ex.getMessage());

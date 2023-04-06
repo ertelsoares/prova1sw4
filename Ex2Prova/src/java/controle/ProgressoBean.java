@@ -4,18 +4,18 @@
  */
 package controle;
 
-import java.io.IOException;
+
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import model.;
 import model.Prova;
 import model.ProvasFeita;
 import model.Questoes;
@@ -69,11 +69,10 @@ public class ProgressoBean implements Serializable {
           
         
     if (this.provaExiste(listaProvasFeitas,atualprova)) {
-            FacesContext.getCurrentInstance().addMessage(null,
+        FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Você já fez a prova", "Você já fez a prova"));
-            return null;
-        
+         return null;
     }else{
         listaProva.add(atualprova);
         this.geraNumerosAleatorios();
@@ -103,7 +102,6 @@ public class ProgressoBean implements Serializable {
         
         atualresposta = new Resposta();
         
-       //atualquestoes.setResultado(resposta);
          this.geraNumerosAleatorios();
         
         if(indiceresposta < 3){
@@ -181,7 +179,7 @@ public class ProgressoBean implements Serializable {
     }
     public Double Nota(ArrayList<Resposta> listaresposta) {
         double countCerta = 0;
-        double nota = 0;
+        double nota;
         for (Resposta r : listaresposta) {
             if(r.isCertaouerrada()){ 
                countCerta++;
@@ -194,6 +192,8 @@ public class ProgressoBean implements Serializable {
         provasFeita = new ProvasFeita(atualprova.getNumeroMatricula(),
         atualprova.getNomedoAluno(),atualprova.getDataProva(),atualprova.getNota());
         listaProvasFeitas.add(provasFeita);
+        NotaComparetor comparetor = new NotaComparetor();
+        Collections.sort(listaProvasFeitas, comparetor);
         atualprova = new Prova();
         provasFeita = new ProvasFeita();
         return "index.xhtml";
