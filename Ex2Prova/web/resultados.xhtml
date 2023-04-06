@@ -19,16 +19,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         
         <c:if test="#{not empty(progressoBean.listaProvasFeitas)}">
             <h1>Resultados </h1>
-        <h:dataTable value="#{progressoBean.listaProvasFeitas}" var="resp" border="1"
+            <h:dataTable value="#{progressoBean.listaProvasFeitas.sort()}" var="resp" border="1"
                      cellpadding="5" class="titulo">
             
             <h:column class="colunas">
-                <f:facet name="header" >Nome</f:facet>
-                <h:outputText value="#{resp.nomedoAluno}"/>
+                <f:facet name="header"  >Matricula</f:facet>
+                <h:outputText value="#{resp.numeroMatricula}"/>
             </h:column>
             <h:column class="colunas">
-                <f:facet name="header"  >Numero de Matricula</f:facet>
-                <h:outputText value="#{resp.numeroMatricula}"/>
+                <f:facet name="header" >Nome</f:facet>
+                <h:outputText value="#{resp.nomedoAluno}"/>
             </h:column >
             <h:column class="colunas">
                 <f:facet name="header">Nota</f:facet>

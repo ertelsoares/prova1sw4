@@ -7,9 +7,12 @@ package controle;
 import dados.Aluno;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,13 +61,22 @@ public class Gerenciador extends HttpServlet {
             String nome = request.getParameter("nome");
             String reqnota1 = request.getParameter("nota1");
             String reqnota2 = request.getParameter("nota2");
-            double nota1 = reqnota1.length() <= 4 && reqnota1.contains(".") || reqnota1.contains(",")? Double.parseDouble(reqnota1.replace(",",".")) : -1;  
-            double nota2 = reqnota2.length() <= 4 && reqnota1.contains(".") || reqnota2.contains(",") ? Double.parseDouble(reqnota2.replace(",",".")) : -1;
+            if(nome.equals("") || reqnota1.equals("") || 
+                   reqnota2.equals("")){
+              throw new Exception("Faltou prencher um campo"); 
+            }
+            DecimalFormat df = new DecimalFormat();
+            DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.forLanguageTag("pt"));
+            double nota1 = df.parse(reqnota1).doubleValue();  
+            double nota2 = df.parse(reqnota2).doubleValue();
             Aluno aluno = new Aluno(nome,nota1,nota2);
            
-           if(nota1 == -1 || nota2 == -1){
-               throw new Exception("Formato numero de casa decimais errado formato experado 0.0 ou 0,0");
+           
+            
+           if(nota1 > 10 || nota2 > 10){
+               throw new Exception("As notas vão até 10 , tem que ser menor que 10");
            }else{
+            
              if(aluno.getMedia() >= 7.0){
              listaAprovados.add(aluno);
              }else{
@@ -73,7 +85,10 @@ public class Gerenciador extends HttpServlet {
            }
            
 
-        }catch (Exception ex) {
+        }catch(ParseException ex){
+          sessao.setAttribute("msgErro", "Formato de número inválido");
+        
+        }catch (Exception ex){
             sessao.setAttribute("msgErro", ex.getMessage());
         }
         response.sendRedirect("index.jsp");
