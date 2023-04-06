@@ -11,12 +11,13 @@
         <title>Alunos Aprovado ou Reprovado</title>
     </head>
     <body>
+        <div class="container">
         <h1 >Dados do aluno</h1>
         <form action="aprovadosereprovados" method="POST">
-            Nome <input type="text" name="nome" size="80" value=""/><br/>
-            Nota 1: <input type="text" name="nota1" size="3" value=""/>
-            Nota 2: <input type="text" name="nota2" size="3" value=""/><br/>
-            <input type="submit" value="Lançar"/>
+            Nome <input type="text"   class="form-control w-25" name="nome" size="80" value="" /><br/>
+            Nota 1: <input type="text"  class="form-control w-25" name="nota1" size="3" value=""/>
+            Nota 2: <input type="text"  class="form-control w-25" name="nota2" size="3" value=""/><br/>
+            <input type="submit" value="Lançar" class="btn btn-success"/>
         </form>
         <c:if test="${not empty msgErro}">
             <p style="color: red">${msgErro}</p>
@@ -29,7 +30,7 @@
         <c:if test="${not empty listaAprovados}">
             <div style="width: 30%; ">
             <h3>Aprovados</h3>
-            <table border="1px" style="width: 100%; ">
+            <table  style="width: 100%; " class="table table-striped">
                 <tr>
                     <th style="padding:1px; ">Nome</th>
                     <th style="padding:1px; ">Nota 1</th>
@@ -52,7 +53,7 @@
             <c:if test="${not empty listaReprovados}">
             <div style="width: 30%; ">
             <h3>Reprovados</h3>
-            <table border="1px" style="width: 100%; ">
+            <table  style="width: 100%; " class="table table-striped">
                 <tr>
                     <th style="padding:1px; ">Nome</th>
                     <th style="padding:1px; ">Nota 1</th>
@@ -76,12 +77,12 @@
                <br/>
             <c:if test="${not empty listaAprovados || not empty listaReprovados}">
                 <form action="aprovadosereprovados" method="POST">
-                <input type="hidden" name="acao" value="limpar"/>
-                 <input type="submit" value="Limpar Listas"/>
+                <input type="hidden" name="acao" value="limpar" />
+                 <input type="submit" value="Limpar Listas" class="btn btn-danger"/>
                   </form>
             </c:if>
           <c:remove var="msgErro" scope="session"/>
           
-         
+         </div>
     </body>
 </html>

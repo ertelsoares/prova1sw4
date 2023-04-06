@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Random;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import model.;
+import model.ComparaNota;
+
 import model.Prova;
 import model.ProvasFeita;
 import model.Questoes;
@@ -84,7 +85,7 @@ public class ProgressoBean implements Serializable {
       this.atualquestoes.setResultado(resposta);
        
         
-       if(indiceresposta <= 3){
+       if(indiceresposta <= 20){
           if(resposta == Integer.parseInt(atualresposta.getResposta())){
           atualresposta.setCertaouerrada(true);
           FacesContext.getCurrentInstance().addMessage("acertouresposta",
@@ -104,14 +105,14 @@ public class ProgressoBean implements Serializable {
         
          this.geraNumerosAleatorios();
         
-        if(indiceresposta < 3){
+        if(indiceresposta < 20){
         this.atualquestoes.setIndice(indiceresposta + 1);
         }else{
           this.atualquestoes.setIndice(indiceresposta);  
         }
         indiceresposta += 1; 
       }
-       if(indiceresposta == 4){
+       if(indiceresposta == 21){
           FacesContext.getCurrentInstance().addMessage("acertouresposta",
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "", ""));
@@ -158,7 +159,7 @@ public class ProgressoBean implements Serializable {
        // Gera um número entre 5 e 9
        
          //Aqui gera as 10 mais fáceis e 10 mais dificfil
-         if(this.atualquestoes.getIndice() + 1 < 3){
+         if(this.atualquestoes.getIndice()  < 10){
          atualquestoes.setNum1(num1facil);
          atualquestoes.setNum2(num2facil);
          }else{
@@ -192,7 +193,7 @@ public class ProgressoBean implements Serializable {
         provasFeita = new ProvasFeita(atualprova.getNumeroMatricula(),
         atualprova.getNomedoAluno(),atualprova.getDataProva(),atualprova.getNota());
         listaProvasFeitas.add(provasFeita);
-        NotaComparetor comparetor = new NotaComparetor();
+        ComparaNota comparetor =  new ComparaNota();
         Collections.sort(listaProvasFeitas, comparetor);
         atualprova = new Prova();
         provasFeita = new ProvasFeita();
